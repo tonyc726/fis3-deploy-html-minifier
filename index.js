@@ -22,7 +22,7 @@ module.exports = function(options, modified, total, next) {
   
   modified.forEach(function(file) {
     if (file.isHtmlLike) {
-      var content = fis.getContent();
+      var content = file.getContent();
 
       file.setContent(minify(content, options))
     }
