@@ -1,0 +1,5 @@
+assets/vendors/
+dist/
+node_modules/
+fis-conf.js
+.eslintrc
