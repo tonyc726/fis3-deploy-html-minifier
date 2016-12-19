@@ -163,6 +163,12 @@ npm-debug.log
 # sftp configuration file
 sftp-config.json
 
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 ### Sass ###
 .sass-cache
