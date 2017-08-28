@@ -32,6 +32,7 @@ npm install fis3-deploy-html-minifier -D
 ```
 
 ## 参考示例
+> 具体的实验可以参考这个项目[fis3-examples](https://github.com/tonyc726/fis3-examples)。
 
 ### 项目目录结构
 ```
@@ -56,12 +57,26 @@ npm install fis3-deploy-html-minifier -D
 fis.match('/template-folder/(**)/(*.html)', {
   release: '/$1/$2'
 });
+fis.match('/template-folder/(*.html)', {
+  release: '/$1'
+});
 // ------ deploy ------
 fis.match('**', {
   deploy: [
     fis.plugin('html-minifier', {
       templatePattern: '',
       i18nPattern: '/template-folder/**/_*.html',
+      // @see https://github.com/kangax/html-minifier#options-quick-reference
+      removeComments: true,
+      collapseWhitespace: true,
+      removeRedundantAttributes: true,
+      useShortDoctype: true,
+      removeEmptyAttributes: true,
+      removeStyleLinkTypeAttributes: true,
+      keepClosingSlash: true,
+      minifyJS: true,
+      minifyCSS: true,
+      minifyURLs: true,
     }),
   ]
 });
