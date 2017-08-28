@@ -7,8 +7,7 @@
  */
 
 import { minify } from 'html-minifier';
-import isGlob from 'is-glob';
-import { merge, forEach } from 'lodash';
+import { merge, forEach, isEmpty } from 'lodash';
 
 /**
  * @type {Object} DEFAULT_CONFIG - 插件默认配置
@@ -34,8 +33,8 @@ const DEFAULT_CONFIG = {
 export default (options, modified, total, fisDeployNextEvent) => {
   const config = merge(DEFAULT_CONFIG, options);
   const { templatePattern, ignorePattern, ...minifyOptions } = config;
-  const isTemplatePatternGlobVerified = isGlob(templatePattern);
-  const isIgnorePatternGlobVerified = isGlob(ignorePattern);
+  const isTemplatePatternVerified = !isEmpty(templatePattern);
+  const isIgnorePatternVerified = !isEmpty(ignorePattern);
   /**
    * @see http://fis.baidu.com/fis3/api/fis.file-File.html
    *
@@ -68,15 +67,18 @@ export default (options, modified, total, fisDeployNextEvent) => {
       modifiedFile.release &&
       (
         // 如果没有过滤的正则，则依据`isHtmlLike`来鉴别
-        (!isTemplatePatternGlobVerified) ?
+        (!isTemplatePatternVerified) ?
           modifiedFile.isHtmlLike :
           // eslint-disable-next-line no-undef
           fis.util.glob(templatePattern, modifiedFile.subpath)
       ) &&
       (
-        isIgnorePatternGlobVerified &&
-        // eslint-disable-next-line no-undef
-        !fis.util.glob(ignorePattern, modifiedFile.subpath)
+        !isIgnorePatternVerified ||
+        (
+          isIgnorePatternVerified &&
+          // eslint-disable-next-line no-undef
+          !fis.util.glob(ignorePattern, modifiedFile.subpath)
+        )
       )
     ) {
       const fileContent = modifiedFile.getContent();
