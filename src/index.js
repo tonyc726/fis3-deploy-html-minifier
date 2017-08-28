@@ -80,7 +80,7 @@ export default (options, modified, total, fisDeployNextEvent) => {
       )
     ) {
       const fileContent = modifiedFile.getContent();
-      modifiedFile.setContent(minify(fileContent, minifyOptions))
+      modifiedFile.setContent(minify(fileContent, minifyOptions));
     }
   });
 
