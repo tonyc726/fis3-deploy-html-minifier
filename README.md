@@ -1,22 +1,81 @@
-#fis3-deploy-html-minifier
-A plugin for [fis3](http://fis.baidu.com/) using [html-minifier](https://github.com/kangax/html-minifier) in deploy.
+# fis3-deploy-html-minifier -- A fis3 plugin to compress file with html-minifier on deploy stage.
+[![npm](https://img.shields.io/npm/v/fis3-deploy-html-minifier.svg?style=flat-square)](https://github.com/tonyc726/fis3-deploy-html-minifier)
+[![Build Status](https://travis-ci.org/tonyc726/fis3-deploy-html-minifier.svg?style=flat-square&branch=master)](https://travis-ci.org/tonyc726/fis3-deploy-html-minifier)
+[![bitHound Code](https://www.bithound.io/github/tonyc726/fis3-deploy-html-minifier/badges/code.svg)](https://www.bithound.io/github/tonyc726/fis3-deploy-html-minifier)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/tonyc726/fis3-deploy-html-minifier)
 
-## Usage
+> Thanks for [fis3-deploy-i18n-template](https://github.com/foio/fis3-deploy-i18n-template)
 
-### fis-conf.js
+在前端的工程构建工具[FIS3](http://fis.baidu.com/)发布阶段，将`modified`中命中`templatePattern`规则，或者未设置`templatePattern`，但是拥有`isHtmlLike: true`的文件，使用 [html-minifier](https://github.com/kangax/html-minifier) 进行压缩。
 
+## 使用说明
+### 如何安装
+```shell
+yarn add fis3-deploy-html-minifier -D
+# OR
+npm install fis3-deploy-html-minifier -D
+```
+
+### 默认配置
+```javascript
+/**
+ * @type {Object} DEFAULT_CONFIG - 插件默认配置
+ * @property {string} [templatePattern=''] - 需要做多语言处理文件subpath的glob规则，默认为所有html文件
+ * @property {string} [ignorePattern=''] - 需要忽略编译的glob规则
+ * @property {...object} minifyOptions - html-minifiers的配置项，具体的可以参考[options-quick-reference](https://github.com/kangax/html-minifier#options-quick-reference)
+ */
+{
+  templatePattern: '',
+  ignorePattern: '',
+  ...minifierOptions,
+};
+```
+
+## 参考示例
+
+### 项目目录结构
+```
+# project root path
+│
+├── template-folder
+│   ├── index.html
+│   ├── _not_compress.html
+│   ├── ...
+│   └── sub-folder
+│       ├── detail.html
+│       └── ...
+│
+├── fis-conf.js
+│
+└── package.json
+```
+
+### 配置`fis-conf.js`中`fis3-deploy-html-minifier`相关的内容
 ``` javascript
-
-fis.match('*.tpl', {
-    isHtmlLike: true
+// ------ templates ------
+fis.match('/template-folder/(**)/(*.html)', {
+  release: '/$1/$2'
 });
-
+// ------ deploy ------
 fis.match('**', {
-   deploy: [
-        fis.plugin('html-minifier', {
-            // html-minifier options
-            // https://github.com/kangax/html-minifier#options-quick-reference
-        }
-    )
+  deploy: [
+    fis.plugin('html-minifier', {
+      templatePattern: '',
+      i18nPattern: '/template-folder/**/_*.html',
+    }),
+  ]
 });
 ```
+
+
+## 参考
+- [node-project-kit](https://github.com/tonyc726/node-project-kit) - 快速创建项目的模板
+- [glob](https://github.com/isaacs/node-glob) - 使用glob语法获取匹配文件的工具
+- [html-minifier](https://github.com/kangax/html-minifier) - html压缩工具
+
+## License
+Copyright © 2017-present. This source code is licensed under the MIT license found in the
+[LICENSE](https://github.com/tonyc726/fis3-deploy-html-minifier/blob/master/LICENSE) file.
+
+---
+Made by Tony ([blog](https://itony.net))
