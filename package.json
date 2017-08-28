@@ -1,8 +1,7 @@
 {
   "name": "node-project-kit",
   "version": "0.0.0-semantic-release",
-  "description": "A boilerplate helps you create node project easier.",
-  "private": true,
+  "description": "A fis3 plugin to compress file with html-minifier on deploy stage.",
   "repository": {
     "type": "git",
     "url": "https://github.com/tonyc726/node-project-kit"
@@ -10,10 +9,10 @@
   "author": "tony <zhujf620@gmail.com>",
   "license": "MIT",
   "keywords": [
-    "node",
-    "npm",
-    "boilerplate",
-    "starter kit"
+    "fis3",
+    "deploy",
+    "minifier",
+    "html-minifier"
   ],
   "engines": {
     "node": ">=6"
