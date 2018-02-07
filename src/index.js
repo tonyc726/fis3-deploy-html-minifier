@@ -6,6 +6,8 @@
  * Author: tonyc726@gmail.com
  */
 
+/* global fis */
+
 import { minify } from 'html-minifier';
 import { merge, forEach, isEmpty } from 'lodash';
 
@@ -65,21 +67,13 @@ export default (options, modified, total, fisDeployNextEvent) => {
   forEach(modified, (modifiedFile) => {
     if (
       modifiedFile.release &&
-      (
-        // 如果没有过滤的正则，则依据`isHtmlLike`来鉴别
-        (!isTemplatePatternVerified) ?
-          modifiedFile.isHtmlLike :
-          // eslint-disable-next-line no-undef
-          fis.util.glob(templatePattern, modifiedFile.subpath)
-      ) &&
-      (
-        !isIgnorePatternVerified ||
-        (
-          isIgnorePatternVerified &&
-          // eslint-disable-next-line no-undef
-          !fis.util.glob(ignorePattern, modifiedFile.subpath)
-        )
-      )
+      // 如果没有过滤的正则，则依据`isHtmlLike`来鉴别
+      (!isTemplatePatternVerified
+        ? modifiedFile.isHtmlLike
+        : fis.util.glob(templatePattern, modifiedFile.subpath)) &&
+      (!isIgnorePatternVerified ||
+        (isIgnorePatternVerified &&
+          !fis.util.glob(ignorePattern, modifiedFile.subpath)))
     ) {
       const fileContent = modifiedFile.getContent();
       modifiedFile.setContent(minify(fileContent, minifyOptions));
