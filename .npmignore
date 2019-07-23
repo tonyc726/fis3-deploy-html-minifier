@@ -1,0 +1,13 @@
+# https://docs.npmjs.com/misc/developers#keeping-files-out-of-your-package
+docs/
+test/
+.babelrc
+.editorconfig
+.eslintignore
+.eslintrc
+.prettierignore
+.prettierrc
+.gitattributes
+.gitignore
+.travis.yml
+.yarnclean

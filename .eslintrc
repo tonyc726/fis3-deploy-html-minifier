@@ -1,18 +1,28 @@
 {
   "root": true,
   "parser": "babel-eslint",
-  "extends": ["standard", "prettier", "prettier/standard"],
+  "extends": ["airbnb-base", "prettier"],
   "env": {
     "node": true,
-    "es6": true
+    "es6": true,
+    "jest": true
   },
-  "plugins": ["html", "prettier", "standard"],
+  "plugins": ["prettier"],
   "parserOptions": {
     "ecmaVersion": 6,
     "sourceType": "module"
   },
+  "globals": {},
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  },
   "rules": {
-    "prettier/prettier": "error",
-    "standard/no-callback-literal": "warn"
+    "prettier/prettier": ["error"],
+    "class-methods-use-this": ["warn"],
+    "import/prefer-default-export": ["warn"]
   }
 }

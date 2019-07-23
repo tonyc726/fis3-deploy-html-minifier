@@ -37,6 +37,7 @@ export default (options, modified, total, fisDeployNextEvent) => {
   const { templatePattern, ignorePattern, ...minifyOptions } = config;
   const isTemplatePatternVerified = !isEmpty(templatePattern);
   const isIgnorePatternVerified = !isEmpty(ignorePattern);
+
   /**
    * @see http://fis.baidu.com/fis3/api/fis.file-File.html
    *
@@ -51,7 +52,7 @@ export default (options, modified, total, fisDeployNextEvent) => {
    * @param {string | boolean}  modifiedFile.release - 文件的发布路径，当值为 false 时，文件不会发布
    *
    * @example
-   *
+   * ```js
    * [{
    *   "ext": ".fileExt",
    *   "filename": "fileName",
@@ -63,8 +64,9 @@ export default (options, modified, total, fisDeployNextEvent) => {
    *   "subpathNoExt": "/fileParentDirPath/fileName",
    *   "release": "/fileParentDirPath/fileName.fileExt",
    * }...]
+   * ```
    */
-  forEach(modified, (modifiedFile) => {
+  forEach(modified, modifiedFile => {
     if (
       modifiedFile.release &&
       // 如果没有过滤的正则，则依据`isHtmlLike`来鉴别
