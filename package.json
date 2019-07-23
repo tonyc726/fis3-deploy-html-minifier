@@ -1,6 +1,6 @@
 {
   "name": "fis3-deploy-html-minifier",
-  "version": "0.0.0-semantic-release",
+  "version": "1.1.0",
   "description": "A fis3 plugin to compress file with html-minifier on deploy stage.",
   "repository": {
     "type": "git",
