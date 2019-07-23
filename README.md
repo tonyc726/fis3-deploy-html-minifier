@@ -1,4 +1,6 @@
-# fis3-deploy-html-minifier -- A fis3 plugin to compress file with html-minifier on deploy stage.
+# fis3-deploy-html-minifier
+
+A fis3 plugin to compress file with html-minifier on deploy stage.
 
 [![npm](https://img.shields.io/npm/v/fis3-deploy-html-minifier.svg?style=flat-square)](https://github.com/tonyc726/fis3-deploy-html-minifier)
 [![Build Status](https://travis-ci.org/tonyc726/fis3-deploy-html-minifier.svg?style=flat-square&branch=master)](https://travis-ci.org/tonyc726/fis3-deploy-html-minifier)
