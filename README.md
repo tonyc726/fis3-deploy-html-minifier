@@ -1,3 +1,7 @@
+# WARNING: This repository is no longer maintained :warning:
+
+> 本项目不再维护，如有需要，请邮件联系
+
 # fis3-deploy-html-minifier
 
 A fis3 plugin to compress file with html-minifier on deploy stage.
